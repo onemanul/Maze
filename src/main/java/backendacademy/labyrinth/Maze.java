@@ -1,18 +1,27 @@
 package backendacademy.labyrinth;
 
+/*
+Лабиринт представляет собой двумерный массив символов. Использованы следующие обозначения:
+    '+' - проход;
+    '-' - стена;
+    '*' - путь;
+    's' - точка старта;
+    'f' - точка финиша.
+ */
+
 public class Maze {
     private static int width;
     private static int height;
     private static int widthOfMaze;
     private static int heightOfMaze;
-    private static boolean[][] maze;
+    private static char[][] maze;
 
     public Maze(int height, int width) {
         Maze.height = height;
         Maze.width = width;
         Maze.heightOfMaze = height;
         Maze.widthOfMaze = width;
-        Maze.maze = new boolean[height][width];
+        Maze.maze = new char[height][width];
     }
 
     public String showMaze() {
@@ -20,10 +29,23 @@ public class Maze {
         mazeString.append("\n");
         for (int i = 0; i < heightOfMaze; ++i) {
             for (int j = 0; j < widthOfMaze; ++j) {
-                if (maze[i][j]) {
-                    mazeString.append("  "); // path
-                } else {
-                    mazeString.append("██"); // wall
+                switch (maze[i][j]) {
+                    case '+':   // проход
+                        mazeString.append("  ");
+                        break;
+                    case '-':   // стена
+                        mazeString.append("██");
+                        break;
+                    case '*':   // путь
+                        mazeString.append("**");
+                        break;
+                    case 's':   // старт
+                        mazeString.append("ST");
+                        break;
+                    case 'f':   // финиш
+                        mazeString.append("FI");
+                        break;
+                    default: mazeString.append("ER");   // ошибка
                 }
             }
             mazeString.append("\n");
@@ -39,7 +61,7 @@ public class Maze {
         return width;
     }
 
-    public static void setMaze(boolean[][] maze) {
+    public static void setMaze(char[][] maze) {
         Maze.maze = maze;
         Maze.heightOfMaze = maze.length;
         Maze.widthOfMaze = maze[0].length;
