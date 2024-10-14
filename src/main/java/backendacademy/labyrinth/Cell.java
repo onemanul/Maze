@@ -16,6 +16,23 @@ public class Cell {
     public int getY() {
         return y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Cell cell = (Cell) obj;
+        return x == cell.getX() && y == cell.getY();
+    }
+
+    @Override
+    public int hashCode() {
+        return 17 * x + 31 * y + 37 * (x + y);
+    }
 }
 
 

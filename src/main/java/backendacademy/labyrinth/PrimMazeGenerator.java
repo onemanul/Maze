@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 /*
@@ -34,22 +34,22 @@ public class PrimMazeGenerator {
 
         int x = new SecureRandom().nextInt(width) * 2 + 1;
         int y = new SecureRandom().nextInt(height) * 2 + 1;
-        HashMap<String, Cell> pointToConnect = new HashMap<String, Cell>();
-        pointToConnect.put(Integer.toString(x) + Integer.toString(y), new Cell(x, y));
+        HashSet<Cell> pointToConnect = new HashSet<Cell>();
+        pointToConnect.add(new Cell(x, y));
 
         while (!pointToConnect.isEmpty()) {
             Cell point = getRandomElement(pointToConnect);
-            pointToConnect.remove(Integer.toString(point.getX()) + Integer.toString(point.getY()));
+            pointToConnect.remove(point);
             x = point.getX();
             y = point.getY();
             maze[y][x] = WAY;
-            connectWithSomeone(pointToConnect, x, y);
+            connectWithSomeone(x, y);
             addPointsToVisit(pointToConnect, x, y);
         }
         return maze;
     }
 
-    private static void connectWithSomeone(HashMap<String, Cell> pointToConnect, int x, int y) {
+    private static void connectWithSomeone(int x, int y) {
         List<Integer> directions = Arrays.asList(0, 1, 2, DX.length - 1);
         Collections.shuffle(directions);
         for (Integer i : directions) {
@@ -64,10 +64,10 @@ public class PrimMazeGenerator {
         }
     }
 
-    private static Cell getRandomElement(HashMap<String, Cell> map) { // Optional
-        List<String> keys = new ArrayList<>(map.keySet());
-        int randomIndex = new SecureRandom().nextInt(keys.size());
-        return map.get(keys.get(randomIndex));
+    private static Cell getRandomElement(HashSet<Cell> set) {
+        List<Cell> cellList = new ArrayList<>(set);
+        int randomIndex = new SecureRandom().nextInt(cellList.size());
+        return cellList.get(randomIndex);
     }
 
     private static boolean cellInMaze(int x, int y) {
@@ -78,13 +78,12 @@ public class PrimMazeGenerator {
         return maze[y][x] == WAY;
     }
 
-    private static void addPointsToVisit(HashMap<String, Cell> pointToConnect, int x, int y) {
+    private static void addPointsToVisit(HashSet<Cell> pointToConnect, int x, int y) {
         for (int i = 0; i < DX.length; ++i) {
             int neighborX = x + DX[i] * 2;
             int neighborY = y + DY[i] * 2;
             if (cellInMaze(neighborX, neighborY) && !cellIsVisited(neighborX, neighborY)) {
-                pointToConnect.put(Integer.toString(neighborX) + Integer.toString(neighborY),
-                    new Cell(neighborX, neighborY));
+                pointToConnect.add(new Cell(neighborX, neighborY));
             }
         }
     }

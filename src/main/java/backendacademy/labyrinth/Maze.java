@@ -1,5 +1,8 @@
 package backendacademy.labyrinth;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /*
 Лабиринт представляет собой двумерный массив символов. Использованы следующие обозначения:
     '+' - проход;
@@ -10,18 +13,20 @@ package backendacademy.labyrinth;
  */
 
 public class Maze {
-    private static int width;
-    private static int height;
-    private static int widthOfMaze;
-    private static int heightOfMaze;
-    private static char[][] maze;
+    private final int width;
+    private final int height;
+    private int widthOfMaze;
+    private int heightOfMaze;
+    private char[][] maze;
+    private final Cell start;
+    private final Cell finish;
+    private ArrayList<Cell> path;
 
-    public Maze(int height, int width) {
-        Maze.height = height;
-        Maze.width = width;
-        Maze.heightOfMaze = height;
-        Maze.widthOfMaze = width;
-        Maze.maze = new char[height][width];
+    public Maze(int height, int width, Cell start, Cell finish) {
+        this.height = height;
+        this.width = width;
+        this.start = start;
+        this.finish = finish;
     }
 
     public String showMaze() {
@@ -40,10 +45,10 @@ public class Maze {
                         mazeString.append("**");
                         break;
                     case 's':   // старт
-                        mazeString.append("ST");
+                        mazeString.append("00");
                         break;
                     case 'f':   // финиш
-                        mazeString.append("FI");
+                        mazeString.append("11");
                         break;
                     default: mazeString.append("ER");   // ошибка
                 }
@@ -53,17 +58,48 @@ public class Maze {
         return mazeString.toString();
     }
 
-    public static int getHeight() {
+    public String showMazeWithWay() {
+        char[][] mazeTrue = new char[maze.length][];
+        for (int i = 0; i < maze.length; i++) {
+            mazeTrue[i] = Arrays.copyOf(maze[i], maze[i].length);
+        }
+        for (Cell c : path) {
+            maze[c.getY()][c.getX()] = '*';
+        }
+        maze[start.getY()][start.getX()] = 's';
+        maze[finish.getY()][finish.getX()] = 'f';
+        String mazeString = showMaze();
+        this.maze = mazeTrue;
+        return mazeString;
+    }
+
+    public int getHeight() {
         return height;
     }
 
-    public static int getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public static void setMaze(char[][] maze) {
-        Maze.maze = maze;
-        Maze.heightOfMaze = maze.length;
-        Maze.widthOfMaze = maze[0].length;
+    public char[][] getMaze() {
+        return maze;
+    }
+
+    public void setMaze(char[][] maze) {
+        this.maze = maze;
+        this.heightOfMaze = maze.length;
+        this.widthOfMaze = maze[0].length;
+    }
+
+    public Cell getStart() {
+        return start;
+    }
+
+    public Cell getFinish() {
+        return finish;
+    }
+
+    public void setPath(ArrayList<Cell> path) {
+        this.path = path;
     }
 }
