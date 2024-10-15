@@ -43,6 +43,8 @@ public class Main {
     }
 
     public static void findAndShowPath(Maze maze) {
+        maze.breakSomeWalls();
+        LOGGER.info("Удалим несколько стен\n" + maze.showMaze());
         maze.setPath(DFSMazeSolver.solve(maze));
         LOGGER.info("Решение 1 (алгоритм DFS)\n" + maze.showMazeWithWay());
         maze.setPath(BFSMazeSolver.solve(maze));

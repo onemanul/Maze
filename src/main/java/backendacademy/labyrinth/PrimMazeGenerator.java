@@ -7,31 +7,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-/*
-Лабиринт представляет собой двумерный массив символов. Использованы следующие обозначения:
-    '+' - проход (WAY);
-    '-' - стена (WALL).
- */
-
-public class PrimMazeGenerator {
+public class PrimMazeGenerator extends MazeHelper {
     private PrimMazeGenerator() {}
 
-    private static int widthOfMaze;
-    private static int heightOfMaze;
-    private static char[][] maze;
-    private static final int[] DX = {1, 0, -1, 0};
-    private static final int[] DY = {0, 1, 0, -1};
-    private static final char WAY = '+';
-    private static final char WALL = '-';
-
     public static char[][] generate(int height, int width) {
-        PrimMazeGenerator.heightOfMaze = height * 2 + 1;
-        PrimMazeGenerator.widthOfMaze = width * 2 + 1;
-        PrimMazeGenerator.maze = new char[heightOfMaze][widthOfMaze];
-        for (char[] row : maze) {
-            Arrays.fill(row, WALL);      // заполняем весь лабиринт стенами
-        }
-
+        maze = mazeFilledWithWalls(height * 2 + 1, width * 2 + 1);
         int x = new SecureRandom().nextInt(width) * 2 + 1;
         int y = new SecureRandom().nextInt(height) * 2 + 1;
         HashSet<Cell> pointToConnect = new HashSet<Cell>();
@@ -68,14 +48,6 @@ public class PrimMazeGenerator {
         List<Cell> cellList = new ArrayList<>(set);
         int randomIndex = new SecureRandom().nextInt(cellList.size());
         return cellList.get(randomIndex);
-    }
-
-    private static boolean cellInMaze(int x, int y) {
-        return (x % 2 == 1) && x < widthOfMaze && (y % 2 == 1) && y < heightOfMaze;
-    }
-
-    private static boolean cellIsVisited(int x, int y) {
-        return maze[y][x] == WAY;
     }
 
     private static void addPointsToVisit(HashSet<Cell> pointToConnect, int x, int y) {

@@ -1,23 +1,19 @@
 package backendacademy.labyrinth;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class BFSMazeSolver extends MazeSolver {
+public class BFSMazeSolver extends MazeHelper {
     private BFSMazeSolver() {}
 
-    public static ArrayList<Cell> solve(Maze maze) {
-        mazeCopy = new char[maze.getMaze().length][];
-        for (int i = 0; i < maze.getMaze().length; i++) {
-            mazeCopy[i] = Arrays.copyOf(maze.getMaze()[i], maze.getMaze()[i].length);
-        }
+    public static ArrayList<Cell> solve(Maze trueMaze) {
+        maze = mazeCopy(trueMaze.getMaze());
         HashMap<Cell, Cell> predecessors = new HashMap<>(); // ключ - текущая ячейка, значение - её ячейка-предок
         LinkedList<Cell> cellsToView = new LinkedList<>();
-        cellsToView.add(maze.getStart());
-        mazeCopy[maze.getStart().getY()][maze.getStart().getX()] = PATH;
+        cellsToView.add(trueMaze.getStart());
+        maze[trueMaze.getStart().getY()][trueMaze.getStart().getX()] = PATH;
         while (!cellsToView.isEmpty()) {
             Cell current = cellsToView.getFirst();
             for (int i = 0; i < DX.length; i++) {
@@ -26,10 +22,10 @@ public class BFSMazeSolver extends MazeSolver {
                 if (cellIsValid(nextX, nextY)) {
                     Cell next = new Cell(nextX, nextY);
                     predecessors.put(next, current);
-                    if (next.equals(maze.getFinish())) {
-                        return reconstructPath(predecessors, maze.getFinish());
+                    if (next.equals(trueMaze.getFinish())) {
+                        return reconstructPath(predecessors, trueMaze.getFinish());
                     } else {
-                        mazeCopy[nextY][nextX] = PATH;
+                        maze[nextY][nextX] = PATH;
                         cellsToView.add(next);
                     }
                 }
@@ -47,5 +43,4 @@ public class BFSMazeSolver extends MazeSolver {
         Collections.reverse(path);
         return path;
     }
-
 }

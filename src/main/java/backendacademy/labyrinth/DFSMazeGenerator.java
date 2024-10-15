@@ -7,27 +7,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
 
-/*
-Лабиринт представляет собой двумерный массив символов. Использованы следующие обозначения:
-    '+' - проход (WAY);
-    '-' - стена (WALL).
- */
-
-public class DFSMazeGenerator {
+public class DFSMazeGenerator extends MazeHelper {
     private DFSMazeGenerator() {}
 
-    private static int widthOfMaze;
-    private static int heightOfMaze;
-    private static char[][] maze;
-    private static final int[] DX = {1, 0, -1, 0};
-    private static final int[] DY = {0, 1, 0, -1};
-    private static final char WAY = '+';
-    private static final char WALL = '-';
-
     public static char[][] generate(int height, int width) {
-        DFSMazeGenerator.heightOfMaze = height * 2 + 1;
-        DFSMazeGenerator.widthOfMaze = width * 2 + 1;
-        DFSMazeGenerator.maze = new char[heightOfMaze][widthOfMaze];
+        int heightOfMaze = height * 2 + 1;
+        int widthOfMaze = width * 2 + 1;
+        maze = new char[heightOfMaze][widthOfMaze];
         for (char[] row : maze) {
             Arrays.fill(row, WALL);      // заполняем весь лабиринт стенами
         }
@@ -69,13 +55,5 @@ public class DFSMazeGenerator {
         int connectorX = (first.getX() + second.getX()) / 2;
         int connectorY = (first.getY() + second.getY()) / 2;
         maze[connectorY][connectorX] = WAY;
-    }
-
-    private static boolean cellInMaze(int x, int y) {
-        return (x % 2 == 1) && x < widthOfMaze && (y % 2 == 1) && y < heightOfMaze;
-    }
-
-    private static boolean cellIsVisited(int x, int y) {
-        return maze[y][x] == WAY;
     }
 }
