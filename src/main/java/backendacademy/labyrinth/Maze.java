@@ -36,19 +36,19 @@ public class Maze {
             for (int j = 0; j < widthOfMaze; ++j) {
                 switch (maze[i][j]) {
                     case '+':   // проход
-                        mazeString.append("  ");
+                        mazeString.append("   ");
                         break;
                     case '-':   // стена
-                        mazeString.append("██");
+                        mazeString.append("███");
                         break;
                     case '*':   // путь
-                        mazeString.append("**");
+                        mazeString.append("***");
                         break;
                     case 's':   // старт
-                        mazeString.append("00");
+                        mazeString.append("[S]");
                         break;
                     case 'f':   // финиш
-                        mazeString.append("11");
+                        mazeString.append("[F]");
                         break;
                     default: mazeString.append("ER");   // ошибка
                 }
