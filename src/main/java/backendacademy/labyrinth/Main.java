@@ -45,7 +45,7 @@ public class Main {
     public static void findAndShowPath(Maze maze) {
         maze.setPath(DFSMazeSolver.solve(maze));
         LOGGER.info("Решение 1 (алгоритм DFS)\n" + maze.showMazeWithWay());
-        maze.setPath(BFSMazeSolver.solve(maze));
+       // maze.setPath(BFSMazeSolver.solve(maze));
         LOGGER.info("Решение 2 (алгоритм BFS)\n" + maze.showMazeWithWay());
     }
 
