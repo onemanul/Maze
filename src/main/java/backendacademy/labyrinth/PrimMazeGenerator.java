@@ -18,7 +18,7 @@ public class PrimMazeGenerator extends MazeHelper {
         pointToConnect.add(new Cell(x, y));
 
         while (!pointToConnect.isEmpty()) {
-            Cell point = getRandomElement(pointToConnect);
+            Cell point = getRandomCell(pointToConnect);
             pointToConnect.remove(point);
             x = point.getX();
             y = point.getY();
@@ -44,8 +44,8 @@ public class PrimMazeGenerator extends MazeHelper {
         }
     }
 
-    private static Cell getRandomElement(HashSet<Cell> set) {
-        List<Cell> cellList = new ArrayList<>(set);
+    private static Cell getRandomCell(HashSet<Cell> pointToConnect) {
+        List<Cell> cellList = new ArrayList<>(pointToConnect);
         int randomIndex = new SecureRandom().nextInt(cellList.size());
         return cellList.get(randomIndex);
     }

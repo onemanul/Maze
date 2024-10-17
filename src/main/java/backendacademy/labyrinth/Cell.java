@@ -34,5 +34,3 @@ public class Cell {
         return 17 * x + 31 * y + 37 * (x + y);
     }
 }
-
-

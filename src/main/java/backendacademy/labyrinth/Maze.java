@@ -29,8 +29,8 @@ public class Maze {
     public Maze(int height, int width, Cell start, Cell finish) {
         this.height = height;
         this.width = width;
-        this.start = start;
-        this.finish = finish;
+        this.start = new Cell((start.getX() - 1) * 2 + 1, (start.getY() - 1) * 2 + 1);
+        this.finish = new Cell((finish.getX() - 1) * 2 + 1, (finish.getY() - 1) * 2 + 1);
         this.maze = new char[height][width];
         this.path = new ArrayList<>();
     }

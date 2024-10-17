@@ -25,11 +25,9 @@ public class Main {
         LOGGER.info("Введите высоту лабиринта:");
         int height = correctSizeInput();    // y
         LOGGER.info("Координаты точки старта (X и Y):");
-        Cell start = new Cell((correctCoordinateInput(width) - 1) * 2 + 1,
-                                (correctCoordinateInput(height) - 1) * 2 + 1);
+        Cell start = new Cell(correctCoordinateInput(width), correctCoordinateInput(height));
         LOGGER.info("Координаты точки финиша (X и Y):");
-        Cell finish = new Cell((correctCoordinateInput(width) - 1) * 2 + 1,
-                                (correctCoordinateInput(height) - 1) * 2 + 1);
+        Cell finish = new Cell(correctCoordinateInput(width), correctCoordinateInput(height));
 
         Maze mazePrim = new Maze(height, width, start, finish);
         mazePrim.setMaze(PrimMazeGenerator.generate(mazePrim.getHeight(), mazePrim.getWidth()));

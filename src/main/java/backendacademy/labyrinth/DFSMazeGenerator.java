@@ -11,13 +11,7 @@ public class DFSMazeGenerator extends MazeHelper {
     private DFSMazeGenerator() {}
 
     public static char[][] generate(int height, int width) {
-        int heightOfMaze = height * 2 + 1;
-        int widthOfMaze = width * 2 + 1;
-        maze = new char[heightOfMaze][widthOfMaze];
-        for (char[] row : maze) {
-            Arrays.fill(row, WALL);      // заполняем весь лабиринт стенами
-        }
-
+        maze = mazeFilledWithWalls(height * 2 + 1, width * 2 + 1);
         int x = new SecureRandom().nextInt(width) * 2 + 1;
         int y = new SecureRandom().nextInt(height) * 2 + 1;
         Stack<Cell> cellStack = new Stack<>();
