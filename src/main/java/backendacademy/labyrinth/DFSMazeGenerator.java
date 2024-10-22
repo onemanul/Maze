@@ -7,13 +7,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
 
-public class DFSMazeGenerator extends MazeHelper {
+public class DFSMazeGenerator extends MazeGeneratorHelper {
     private DFSMazeGenerator() {}
 
     public static char[][] generate(int height, int width) {
-        maze = mazeFilledWithWalls(height * 2 + 1, width * 2 + 1);
-        int x = new SecureRandom().nextInt(width) * 2 + 1;
-        int y = new SecureRandom().nextInt(height) * 2 + 1;
+        DFSMazeGenerator dfs = new DFSMazeGenerator();
+        return dfs.generator(height, width);
+    }
+
+    protected char[][] generator(int height, int width) {
+        maze = mazeFilledWithWalls(toActualMazeDimension(height), toActualMazeDimension(width));
+        int x = toActualMazeDimension(new SecureRandom().nextInt(width));
+        int y = toActualMazeDimension(new SecureRandom().nextInt(height));
         Stack<Cell> cellStack = new Stack<>();
         cellStack.add(new Cell(x, y));
 

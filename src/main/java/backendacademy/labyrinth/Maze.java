@@ -18,8 +18,8 @@ import java.util.List;
 public class Maze {
     private final int width;
     private final int height;
-    private int widthOfMaze;
-    private int heightOfMaze;
+    private int actualMazeWidth;
+    private int actualMazeHeight;
     private char[][] maze;
     private final Cell start;
     private final Cell finish;
@@ -29,8 +29,8 @@ public class Maze {
     public Maze(int height, int width, Cell start, Cell finish) {
         this.height = height;
         this.width = width;
-        this.start = new Cell((start.getX() - 1) * 2 + 1, (start.getY() - 1) * 2 + 1);
-        this.finish = new Cell((finish.getX() - 1) * 2 + 1, (finish.getY() - 1) * 2 + 1);
+        this.start = new Cell(actualCellCoordinate(start.getX()), actualCellCoordinate(start.getY()));
+        this.finish = new Cell(actualCellCoordinate(finish.getX()), actualCellCoordinate(finish.getY()));
         this.maze = new char[height][width];
         this.path = new ArrayList<>();
     }
@@ -38,8 +38,8 @@ public class Maze {
     public String showMaze() {
         StringBuilder mazeString = new StringBuilder();
         mazeString.append("\n");
-        for (int i = 0; i < heightOfMaze; ++i) {
-            for (int j = 0; j < widthOfMaze; ++j) {
+        for (int i = 0; i < actualMazeHeight; ++i) {
+            for (int j = 0; j < actualMazeWidth; ++j) {
                 switch (maze[i][j]) {
                     case '+':   // проход
                         mazeString.append("   ");
@@ -66,7 +66,7 @@ public class Maze {
 
     public String showMazeWithWay() {
         if (path.isEmpty()) {
-            return showMaze();
+            return "Путь не найден или не существует.\n";
         }
         char[][] mazeTrue = new char[maze.length][];
         for (int i = 0; i < maze.length; i++) {
@@ -86,7 +86,7 @@ public class Maze {
         int[] dx = {1, 0, -1, 0};
         int[] dy = {0, 1, 0, -1};
         int numberWallsToBreak = (int)
-            (((heightOfMaze - 2) * (widthOfMaze - 2) - height * width * 2) * partOfWallsToDelete);
+            (((actualMazeHeight - 2) * (actualMazeWidth - 2) - height * width * 2) * partOfWallsToDelete);
         List<Integer> directions = Arrays.asList(0, 1, 2, dx.length - 1);
         while (numberWallsToBreak != 0) {
             int x = new SecureRandom().nextInt(width) * 2 + 1;
@@ -105,7 +105,11 @@ public class Maze {
     }
 
     private boolean wallCanBeBroken(int x, int y) {
-        return (x > 0) && (x < widthOfMaze - 1) && (y > 0) && (y < heightOfMaze - 1) && maze[y][x] == '-';
+        return (x > 0) && (x < actualMazeWidth - 1) && (y > 0) && (y < actualMazeHeight - 1) && maze[y][x] == '-';
+    }
+
+    private int actualCellCoordinate(int x) {
+        return (x - 1) * 2 + 1;
     }
 
     public int getHeight() {
@@ -122,8 +126,8 @@ public class Maze {
 
     public void setMaze(char[][] maze) {
         this.maze = maze;
-        this.heightOfMaze = maze.length;
-        this.widthOfMaze = maze[0].length;
+        this.actualMazeHeight = maze.length;
+        this.actualMazeWidth = maze[0].length;
     }
 
     public Cell getStart() {

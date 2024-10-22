@@ -3,10 +3,15 @@ package backendacademy.labyrinth;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class DFSMazeSolver extends MazeHelper {
+public class DFSMazeSolver extends MazeSolverHelper {
     private DFSMazeSolver() {}
 
     public static ArrayList<Cell> solve(Maze trueMaze) {
+        DFSMazeSolver dfs = new DFSMazeSolver();
+        return dfs.solver(trueMaze);
+    }
+
+    protected ArrayList<Cell> solver(Maze trueMaze) {
         maze = mazeCopy(trueMaze.getMaze());
         ArrayList<Cell> path = new ArrayList<>();
         path.add(trueMaze.getStart());

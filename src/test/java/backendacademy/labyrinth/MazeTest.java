@@ -35,10 +35,10 @@ class MazeTest {
 
     @Test
     void testGetters() {
-        assertEquals(new Cell (1, 1), maze.getStart(), "Start cell should be correct");
-        assertEquals(new Cell (5, 5), maze.getFinish(), "Finish cell should be correct");
-        assertEquals(3, maze.getHeight(), "Height should be correct");
-        assertEquals(3, maze.getWidth(), "Width should be correct");
+        assertEquals(new Cell (1, 1), maze.getStart());
+        assertEquals(new Cell (5, 5), maze.getFinish());
+        assertEquals(3, maze.getHeight());
+        assertEquals(3, maze.getWidth());
     }
 
     @Test
@@ -53,7 +53,7 @@ class MazeTest {
     }
 
     @Test
-    void testShowMazeWithWay() {
+    void testShowMazeWithWay_CorrectWay() {
         ArrayList<Cell> pathToSet = new ArrayList<>(List.of(
             new Cell(1,1),
             new Cell(2,1),
@@ -72,5 +72,12 @@ class MazeTest {
                                 "███   █████████***███\n" +
                                 "███   ███      [F]███\n" +
                                 "█████████████████████\n", maze.showMazeWithWay());
+    }
+
+    @Test
+    void testShowMazeWithWay_EmptyWay() {
+        ArrayList<Cell> pathToSet = new ArrayList<>();
+        maze.setPath(pathToSet);
+        assertEquals("Путь не найден или не существует.\n", maze.showMazeWithWay());
     }
 }

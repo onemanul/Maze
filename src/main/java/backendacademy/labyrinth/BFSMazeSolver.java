@@ -5,10 +5,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class BFSMazeSolver extends MazeHelper {
+public class BFSMazeSolver extends MazeSolverHelper {
     private BFSMazeSolver() {}
 
     public static ArrayList<Cell> solve(Maze trueMaze) {
+        BFSMazeSolver bfs = new BFSMazeSolver();
+        return bfs.solver(trueMaze);
+    }
+
+    protected ArrayList<Cell> solver(Maze trueMaze) {
         maze = mazeCopy(trueMaze.getMaze());
         HashMap<Cell, Cell> predecessors = new HashMap<>(); // ключ - текущая ячейка, значение - её ячейка-предок
         LinkedList<Cell> cellsToView = new LinkedList<>();

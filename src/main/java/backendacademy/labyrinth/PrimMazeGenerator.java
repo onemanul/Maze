@@ -7,13 +7,18 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class PrimMazeGenerator extends MazeHelper {
+public class PrimMazeGenerator extends MazeGeneratorHelper {
     private PrimMazeGenerator() {}
 
     public static char[][] generate(int height, int width) {
-        maze = mazeFilledWithWalls(height * 2 + 1, width * 2 + 1);
-        int x = new SecureRandom().nextInt(width) * 2 + 1;
-        int y = new SecureRandom().nextInt(height) * 2 + 1;
+        PrimMazeGenerator prim = new PrimMazeGenerator();
+        return prim.generator(height, width);
+    }
+
+    protected char[][] generator(int height, int width) {
+        maze = mazeFilledWithWalls(toActualMazeDimension(height), toActualMazeDimension(width));
+        int x = toActualMazeDimension(new SecureRandom().nextInt(width));
+        int y = toActualMazeDimension(new SecureRandom().nextInt(height));
         HashSet<Cell> pointToConnect = new HashSet<Cell>();
         pointToConnect.add(new Cell(x, y));
 
