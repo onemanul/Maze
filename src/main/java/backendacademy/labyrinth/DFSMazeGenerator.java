@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
 
+/**
+ * Генератор лабиринтов на основе алгоритма поиска в глубину (DFS).
+ * Наследует функциональность от MazeGeneratorHelper.
+ */
+
 public class DFSMazeGenerator extends MazeGeneratorHelper {
     private DFSMazeGenerator() {}
 
@@ -15,6 +20,18 @@ public class DFSMazeGenerator extends MazeGeneratorHelper {
         return dfs.generator(height, width);
     }
 
+    /**
+     * Реализация алгоритма:
+     *  1. Создать лабиринт, полностью заполненный стенами.
+     *  2. Выбрать случайную клетку лабиринта и добавить её в стек.
+     *  3. Пока стек не пуст:
+     *      3.1. Получить клетку из стека и отметить как "проход".
+     *      3.2. Выбрать случайного ещё не посещённого соседа текущей клетки и соединить их проходом. Добавить
+     *           соседа в стек.
+     *      3.3. Если подходящий сосед не найден, удалить текущую клетку из стека.
+     *
+     * @return двумерный массив символов, где '+' - проход (WAY), '-' - стена (WALL).
+     */
     protected char[][] generator(int height, int width) {
         maze = mazeFilledWithWalls(toActualMazeDimension(height), toActualMazeDimension(width));
         int x = toActualMazeDimension(new SecureRandom().nextInt(width));

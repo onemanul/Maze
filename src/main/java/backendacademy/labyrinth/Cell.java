@@ -1,5 +1,10 @@
 package backendacademy.labyrinth;
 
+/**
+ * Представляет ячейку в двумерном массиве лабиринта.
+ * Каждая ячейка определяется своими координатами (x, y).
+ */
+
 public class Cell {
     private int x;
     private int y;
@@ -17,6 +22,10 @@ public class Cell {
         return y;
     }
 
+    /**
+     * Сравнивает ячейку с заданным объектом на равенство.
+     * Две ячейки считаются равными, если их координаты совпадают.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

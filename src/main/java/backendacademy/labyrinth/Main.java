@@ -5,13 +5,8 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 import lombok.experimental.UtilityClass;
 
-/*
-Лабиринт представляет собой двумерный массив символов. Использованы следующие обозначения:
-    '+' - проход;
-    '-' - стена;
-    '*' - путь;
-    's' - точка старта;
-    'f' - точка финиша.
+/**
+ * Главный класс приложения для генерации лабиринтов и поиска путей в них.
  */
 
 @UtilityClass
@@ -50,6 +45,10 @@ public class Main {
         }
     }
 
+    /**
+     * Запрашивает у пользователя выбор алгоритма генерации лабиринта.
+     * @return номер выбранного алгоритма (1 или 2)
+     */
     public static int chooseMazeGenerator() {
         LOGGER.info("""
                 Выберите алгоритм генерации лабиринта (введите номер):
@@ -79,6 +78,10 @@ public class Main {
         }
     }
 
+    /**
+     * Запрашивает у пользователя корректный размер лабиринта.
+     * @return корректный размер лабиринта
+     */
     public static int correctSizeInput() {
         Optional<Integer> optSize = checkForInt(in.nextLine());
         while (optSize.isEmpty() || optSize.get() < MIN_MAZE_SIZE || optSize.get() > MAX_MAZE_SIZE) {
@@ -88,6 +91,11 @@ public class Main {
         return optSize.get();
     }
 
+    /**
+     * Запрашивает у пользователя корректную координату для точек старта и финиша.
+     * @param max максимальное значение для координаты
+     * @return корректное значение координаты
+     */
     public static int correctCoordinateInput(int max) {
         Optional<Integer> optCoordinate;
         do  {

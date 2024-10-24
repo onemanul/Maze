@@ -3,6 +3,11 @@ package backendacademy.labyrinth;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Абстрактный класс, предоставляющий вспомогательные методы для поиска пути в лабиринте.
+ * Реализует интерфейс MazeHelper, содержит абстрактный метод solver.
+ */
+
 public abstract class MazeSolverHelper implements MazeHelper {
     protected static char[][] maze;
 

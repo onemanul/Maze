@@ -7,6 +7,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Генератор лабиринтов на основе алгоритма Прима.
+ * Наследует функциональность от MazeGeneratorHelper.
+ */
+
 public class PrimMazeGenerator extends MazeGeneratorHelper {
     private PrimMazeGenerator() {}
 
@@ -15,6 +20,17 @@ public class PrimMazeGenerator extends MazeGeneratorHelper {
         return prim.generator(height, width);
     }
 
+    /**
+     * Реализация алгоритма:
+     *  1. Создать лабиринт, полностью заполненный стенами.
+     *  2. Выбрать случайную клетку лабиринта как клетку для последующего посещения.
+     *  3. Пока есть клетки для посещения:
+     *      3.1. Выбрать из них случайную и отметить как "проход".
+     *      3.2. Соединить её со случайной соседней клеткой, уже отмеченной как "проход".
+     *      3.3. Добавить к клеткам для посещения всех соседей данной клетки, ещё не отмеченых как "проход".
+     *
+     * @return двумерный массив символов, где '+' - проход (WAY), '-' - стена (WALL).
+     */
     protected char[][] generator(int height, int width) {
         maze = mazeFilledWithWalls(toActualMazeDimension(height), toActualMazeDimension(width));
         int x = toActualMazeDimension(new SecureRandom().nextInt(width));

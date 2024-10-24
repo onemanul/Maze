@@ -2,6 +2,11 @@ package backendacademy.labyrinth;
 
 import java.util.Arrays;
 
+/**
+ * Абстрактный класс, предоставляющий вспомогательные методы для генерации лабиринта.
+ * Реализует интерфейс MazeHelper, содержит абстрактный метод generator.
+ */
+
 public abstract class MazeGeneratorHelper implements MazeHelper {
     protected static char[][] maze;
 

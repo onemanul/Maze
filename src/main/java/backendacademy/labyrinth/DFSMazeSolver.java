@@ -3,6 +3,11 @@ package backendacademy.labyrinth;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * Решатель лабиринтов на основе алгоритма поиска в глубину (DFS).
+ * Наследует функциональность от MazeSolverHelper.
+ */
+
 public class DFSMazeSolver extends MazeSolverHelper {
     private DFSMazeSolver() {}
 
@@ -11,6 +16,17 @@ public class DFSMazeSolver extends MazeSolverHelper {
         return dfs.solver(trueMaze);
     }
 
+    /**
+     * Реализация алгоритма:
+     *  1. Добавить стартовую клетку в список (путь).
+     *  2. До тех пор, пока список не пуст или пока новая клетка не финиш:
+     *      2.1. Получить из списка последнюю клетку.
+     *      2.2. Выбрать из её соседей случайную клетку-проход, не отмеченную пройденной.
+     *          2.2.1. Если такой сосед существует, отметить текущую клетку пройденной, а соседнюю добавить в список.
+     *          2.2.2. Если такого соседа нет, заблокировать текущую клетку (отметить стеной) и удалить её из списка.
+     *
+     * @return ArrayList клеток пути от старта до финиша. Если путь не найден, возвращает пустой ArrayList.
+     */
     protected ArrayList<Cell> solver(Maze trueMaze) {
         maze = mazeCopy(trueMaze.getMaze());
         ArrayList<Cell> path = new ArrayList<>();
