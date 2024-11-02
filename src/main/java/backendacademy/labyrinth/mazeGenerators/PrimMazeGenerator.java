@@ -1,5 +1,7 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeGenerators;
 
+import backendacademy.labyrinth.mazeHelpers.MazeGeneratorHelper;
+import backendacademy.labyrinth.mazeStructures.Cell;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;

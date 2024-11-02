@@ -1,5 +1,11 @@
 package backendacademy.labyrinth;
 
+import backendacademy.labyrinth.mazeGenerators.DFSMazeGenerator;
+import backendacademy.labyrinth.mazeGenerators.PrimMazeGenerator;
+import backendacademy.labyrinth.mazeSolvers.BFSMazeSolver;
+import backendacademy.labyrinth.mazeSolvers.DFSMazeSolver;
+import backendacademy.labyrinth.mazeStructures.Cell;
+import backendacademy.labyrinth.mazeStructures.Maze;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.logging.Logger;

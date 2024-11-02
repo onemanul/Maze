@@ -1,4 +1,4 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeStructures;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeHelpers;
 
 import java.util.Arrays;
 

@@ -1,5 +1,6 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeStructuresTests;
 
+import backendacademy.labyrinth.mazeStructures.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

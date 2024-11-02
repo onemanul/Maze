@@ -1,4 +1,4 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeHelpers;
 
 /**
  * Интерфейс для абстрактных классов генератора и решателя лабиринтов.

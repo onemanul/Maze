@@ -1,5 +1,6 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeGeneratorsTests;
 
+import backendacademy.labyrinth.mazeGenerators.DFSMazeGenerator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

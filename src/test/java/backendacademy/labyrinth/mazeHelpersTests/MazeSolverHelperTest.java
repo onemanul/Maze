@@ -1,9 +1,10 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeHelpersTests;
 
-import org.junit.jupiter.api.BeforeEach;
+import backendacademy.labyrinth.mazeHelpers.MazeSolverHelper;
+import backendacademy.labyrinth.mazeSolvers.*;
+import backendacademy.labyrinth.mazeStructures.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MazeSolverHelperTest extends MazeSolverHelper {

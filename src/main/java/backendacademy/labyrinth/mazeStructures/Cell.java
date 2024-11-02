@@ -1,4 +1,4 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeStructures;
 
 /**
  * Представляет ячейку в двумерном массиве лабиринта.

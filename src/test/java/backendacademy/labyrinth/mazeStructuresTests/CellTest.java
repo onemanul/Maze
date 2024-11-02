@@ -1,5 +1,6 @@
-package backendacademy.labyrinth;
+package backendacademy.labyrinth.mazeStructuresTests;
 
+import backendacademy.labyrinth.mazeStructures.Cell;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
